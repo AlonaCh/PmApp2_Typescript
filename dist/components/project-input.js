@@ -14,6 +14,7 @@ export class ProjectInput extends Component {
         this.titleInputElement = this.element.querySelector('#title');
         this.descriptionInputElement = this.element.querySelector('#description');
         this.peopleInputElement = this.element.querySelector('#people');
+        this.commentInputElement = this.element.querySelector('#comment');
         this.configure();
     }
     configure() {
@@ -24,6 +25,7 @@ export class ProjectInput extends Component {
         const enteredTitle = this.titleInputElement.value;
         const enteredDescription = this.descriptionInputElement.value;
         const enteredPeople = this.peopleInputElement.value;
+        const enteredComment = this.commentInputElement.value;
         const titleValidatable = {
             value: enteredTitle,
             required: true,
@@ -39,27 +41,35 @@ export class ProjectInput extends Component {
             min: 1,
             max: 5,
         };
+        const commentValidatable = {
+            value: enteredComment,
+            required: false,
+            min: 1,
+            max: 5,
+        };
         if (!validate(titleValidatable) ||
             !validate(descriptionValidatable) ||
-            !validate(peopleValidatable)) {
+            !validate(peopleValidatable) ||
+            !validate(commentValidatable)) {
             alert('Invalid input, please try again!');
             return;
         }
         else {
-            return [enteredTitle, enteredDescription, +enteredPeople];
+            return [enteredTitle, enteredDescription, +enteredPeople, enteredComment];
         }
     }
     clearInputs() {
         this.titleInputElement.value = '';
         this.descriptionInputElement.value = '';
         this.peopleInputElement.value = '';
+        this.commentInputElement.value = '';
     }
     submitHandler(event) {
         event.preventDefault();
         const userInput = this.gatherUserInput();
         if (Array.isArray(userInput)) {
-            const [title, desc, people] = userInput;
-            projectState.addProject(title, desc, people);
+            const [title, desc, people, comment] = userInput;
+            projectState.addProject(title, desc, people, comment);
             this.clearInputs();
         }
     }

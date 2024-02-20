@@ -4,10 +4,11 @@ export var ProjectStatus;
     ProjectStatus[ProjectStatus["Finished"] = 1] = "Finished";
 })(ProjectStatus || (ProjectStatus = {}));
 export class Project {
-    constructor(id, title, description, people, status) {
+    constructor(id, title, description, comment, people, status) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.comment = comment;
         this.people = people;
         this.status = status;
     }

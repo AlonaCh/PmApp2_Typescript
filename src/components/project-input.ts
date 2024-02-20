@@ -57,7 +57,7 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     };
     const commentValidatable: Validatable = {
       value: enteredComment,
-      required: true,
+      required: false,
       min: 1,
       max: 5,
     };
